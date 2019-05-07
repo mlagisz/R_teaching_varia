@@ -1,0 +1,137 @@
+---
+title: "learn_Rmd"
+author: "ML"
+date: "27/03/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = TRUE) #allow some execution errors for demonstration purposes
+knitr::opts_chunk$set(eval = TRUE, echo = TRUE, warning = FALSE, collapse = TRUE, comment = "#>")
+sessionInfo()
+
+```
+
+## Use Rmarkdown and RStudio - an intro
+
+Before the lesson: make sure you got the latest R Studio and latest R version installed.
+
+Lesson objectives: 
+- learn and practice basic markdown notations
+- making simple R markdown documents in RStudio
+
+Lesson outline:
+- About this lesson
+- Markdown
+- RMarkdown
+- Why we need RMarkdown?
+- Why RStudio?
+- Starting RStudio
+- Making new Rmd document file
+- Knitting
+- Code chunks
+- Practice
+- More resouces
+
+# About this lesson
+
+This lesson is prepared for these who are already familiar with R coding language, but have not used R markdown or RStudio. Thus, we assume basic knowledge of R programming language and we aim to teach the only the basics of Rmarkdown and R Studio. By the end of this tutorial you should be able to create a simple html document containing  markdown-formatted text, images and R code, all in R Studio.
+
+By the way, this document was created using R Markdown in RStudio!
+
+****
+
+# Markdown
+Markdown is a simple text formatting syntax for crating HTML documents (at least originally). It works by introducing special sets of formattig characters directly into the texts, which are understood by the text viewers and rendered as formatted text.w
+
+- **TASK 1**
+Take a 10min tutorialn to learn the basics of the standard markdown:
+https://commonmark.org/help/tutorial/
+
+- **TASK 2**
+Have a look at the markdown reference page:
+https://commonmark.org/help/
+
+
+****
+# R Markdown 
+R Markdown is a version of Pandoc’s markdown formatting, which is in turn based on the standard Markdown you just learned above. There are small differences between different versions of Markdown (just like English!), but the basic formatting conventions should work for most of the markdown styles. Pandoc's markdorwn (and R Markdown)  has additional syntax available for formatting tables, footnotes, maths and other non-basic text features that are useful when preparing documents in R. The complete list of markdown formatting futures available via Pandoc, please visit the official documentation <https://pandoc.org/MANUAL.html#pandocs-markdown> (actually, Pandoc is a universal converter for many markup formats, but we are not going to cover it here). 
+
+
+- **TASK 3**
+Have a look at the Rmarkdown cheatsheet (save the pdf for future reference!):
+https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf
+
+
+****
+# Why RMarkdown?
+
+Rather than having your R code in one document and the text describing it in another, Rmarkdown documents allow combining theses in a single file.   
+
+Apart of tis, there are several main advantages of working with Rmarkdown documents: 
+- as in plain R file, you can save and execute code
+- you can split your code into smaller units called "chunks", which are tidier and easier to work with
+- the Rmarkdown document gets translated "knitted" into an output document, and you have control on how it is fomratted and whet is included: elements such as Rcode, R text output, plots, tables, pictures, can be turned on or off. 
+- you can have Rcode inline inserts to dynamically update values presented in your text (i.e. no more coping and pasting results of statistical tests).
+- once you know Rmarkdawn you can use it and its extensions to create a wide range of documents, including presentations, websites, and even books
+- finally, you can generate high quality and reproducible reports in various formats 
+
+- **TASK 5**
+Have a look at this 1-minute video about what’s possible with R Markdown:
+https://rmarkdown.rstudio.com/lesson-1.html
+Note: this webpage contains more detailed and extensive lessons on using Rmarkdown in RStudio - you could have a look at these later on.
+
+
+****
+
+# Why RStudio?
+
+RStudio is a well-established and well-supported GUI (Grphical User Interface) that makes working with R code and RMarkdown easier (and it is free and Open-Source as well). It does not take away the fun of typing and editing code in an "code editor" window and/or an R console! But it also has menus and additional windows that display useful things, such as help files, your plots, lists of files, packages and objects stored in your computing enviornment, simplified Git interface, etc. These extras make coding and creating documents in RStudio much easier to learn and use. RStudio makes creating Rmarkdown documents easy. Let's have a go at it.
+
+
+- **TASK 4**
+Have a look at the Rmarkdown cheatsheet (save the pdf for future reference!):
+https://commonmark.org/help/
+
+****
+
+# Starting RStudio
+
+## RStudio window
+You should have RStudio installed by now. Open it on your computer. You will see four standard panes and tabs within panes (you can resize or close them once you know what settings work for you best, for now leave as they are).
+
+# Making new Rmd document
+
+# Knitting
+
+# Code chunks
+
+# Practice
+
+
+# More resouces
+## R Markdown
+- more details on using R Markdown: <http://rmarkdown.rstudio.com>
+
+## RStudio
+- keyboard shortcuts to speed you up in RStudio: <https://appsilon.com/r-studio-shortcuts-and-tips/>
+
+
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+

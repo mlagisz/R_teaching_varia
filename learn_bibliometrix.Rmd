@@ -363,6 +363,7 @@ bib <- metaTagExtraction(bib, Field = "AU_CO", sep = ";") #we need to extract co
 NetMatrix <- biblioNetwork(bib, analysis = "collaboration", network = "countries", sep = ";")
 net = networkPlot(NetMatrix, n = 10, Title = "Country Collaboration", type = "auto", size = TRUE, remove.multiple = FALSE, labelsize = 0.5)
 ```
+
 Above, we plotted only the top 10 most collaborating countrie (n=10), try increasing this number to 50 (would not recommend further increasing the number of displayed nodes to >100 - it gets slow and messy).   
 What happens and why? 
 
@@ -387,11 +388,11 @@ Try replacing network = "keywords" with network = "author_keywords" and see what
 
 **Co-Word Analysis** - uses the word co-occurrences in a bibliographic collection to map the conceptual structure of research. It works via a separate function *conceptualStructure* that creates a conceptual structure map of a scientific field performing Correspondence Analysis (CA), Multiple Correspondence Analysis (MCA) or Metric Multidimensional Scaling (MDS) and Clustering of a bipartite network of terms extracted from keyword, title or abstract fields of the data frame.   
 
-```{r  conceptualStructure map, eval=FALSE}
+```{r  conceptualStructure map, eval=TRUE}
 CS <- conceptualStructure(bib, field = "ID", minDegree = 20, k.max = 5, stemming = FALSE, labelsize = 10)
 ```
 
-The code above uses field ID, which stands for "conceptualStructure". Try using authors keywords, "DE" field, instead.   
+The code above uses field ID, which stands for "conceptualStructure". You coul try using authors keywords, "DE" field, instead.   
 Is the map different?    
 
 
@@ -403,14 +404,15 @@ Is the map different?
 *histNetwork* function calculates a chronological direct citation network matrix which then is plotted using *histPlot*:
 
 ```{r  histNetwork, eval=TRUE, message=FALSE}
-options(width = 130)
-histResults <- histNetwork(bib, n = 100, sep = ";")
+#options(width = 130)
+histResults <- histNetwork(bib, min.citations = 10, sep = ";")
 net = histPlot(histResults, labelsize = 2, arrowsize = 0.5)
 ```
 
+Only articles with minimum of 10 citations are included in teh above analysis, if you change this number to a higher value, the analyses will be quicker and the plot less dense.    
 
 
-**MORE**
+**MORE TO DO**
 You can use different types of network plots - just tweak "type" parameter in the *networkPlot* function (check the vignette for the available options). Type indicates the network map layout: circle, kamada-kawai, mds, etc.     
 
 You can use non-R tools to visualise bibliographic networks, e.g. VOSviewer software by Nees Jan van Eck and Ludo Waltman (http://www.vosviewer.com). When in R function you usetype=“vosviewer”, the function will export the network a standard "pajek" network file (named “vosnetwork.net”), which can be used in other network-plotting software, including VOSviewer.   

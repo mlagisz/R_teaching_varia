@@ -1,7 +1,7 @@
 ---
-title: "Using Rmarkdown and RStudio - an intro"
-author: "MLagisz"
-date: "08/05/2019"
+title: "Learn Rmarkdown and RStudio"
+author: "M.Lagisz"
+date: "04/06/2019"
 output: html_document
 ---
 

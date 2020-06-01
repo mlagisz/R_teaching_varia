@@ -1,8 +1,10 @@
 ---
 title: "Learning bibliometrix"
 author: "M.Lagisz"
-date: "04/06/2019"
-output: html_document
+date: "01/06/2020"
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r mysetup, include=FALSE}
@@ -136,7 +138,7 @@ knitr::include_graphics("images/Scopus_TI_res_analaysis.png")
 
 ### TASK 3    
 
-Next, we will export the bo=ibliometric records for more detailed bibliometric analyses in R. To do so, close the Scopus analyses window to go back to the list of records found. First, select all records by clicking box "All" in the left top of the list of references. Then click the "Export" link to the right.    
+Next, we will export the bibliometric records for more detailed bibliometric analyses in R. To do so, close the Scopus analyses window to go back to the list of records found. First, select all records by clicking box "All" in the left top of the list of references. Then click the "Export" link to the right.    
 
 A pop-up window with the export options will appear.   
 First, select the format of the export: we will uses .bib file (BibTex format of references, one of the standard ones).   
@@ -155,7 +157,7 @@ knitr::include_graphics("images/Scopus_TI_res_all_export_bib.png")
 Click "Export" button. A file named "Scopus" (with extension matching your export type file, e.g., bib) will be saved to your downloads folder.    
 Note that when you export references with their reference lists included in the records, the resulting files are quite large (in our case around 16Mb).   
 
-In case you did not succeed expoerting the files (or wish to work with exactly the same ones we used, or you cannot acces Scopus), the files downloaded on 27/05/2019 are provided (the standard way os to store them in a "/data" subdirectory).   
+In case you did not succeed exporting the files (or wish to work with exactly the same ones we used, or you cannot acces Scopus), the files downloaded on 27/05/2019 are provided (the standard way is to store them in a "/data" subdirectory).   
 
 
 ****   
@@ -176,8 +178,7 @@ Upload the file exported from Scopus (you can use one provided) into RStudio (no
 Then, convert the data from that file into internal *bibliometrix* format.  
 
 ```{r upload data, eval=TRUE}
-tmp <- readFiles("data/scopus.bib")
-bib <- convert2df(tmp, dbsource = "scopus", format = "bibtex") # Convert to a bibliometric data frame
+bib <- convert2df("data/scopus.bib", dbsource = "scopus", format = "bibtex") # Convert to a bibliometric data frame
 names(bib)
 #write.csv(bib, "data/bib_as_df.csv", row.names = FALSE) #if you want to save this data frame as a csv file
 ```
@@ -237,7 +238,11 @@ In such case, for this exercise, make your data frame smaller by subsetting it, 
 ```{r  descriptive tables, eval=TRUE}
 # Preliminary descriptive analyses 
 results <- biblioAnalysis(bib, sep = ";")
-summary(object = results, k = 10, pause = TRUE) 
+#summary(object = results, k = 10, pause = TRUE) #display a series of summary tables
+
+# Reduce the dataset to the subset first 500 records
+bib <- bib[1:500, ] #taking first 500 records
+#summary(object = results, k = 10, pause = TRUE) #display a series of summary tables
 ```
 
 Using summary function on *bibliometrix* results, we can get several screens with various tables summarising bibliometric data from our data frame - how many documents, journals, keywords, authors, publicatons timespan, collaboration index, annual publication growth rate, most prolific authors, publications per country, per journal, per keywords, etc.    
@@ -264,14 +269,14 @@ Ten most cited papers:
 
 ```{r  most cited papers, eval=TRUE}
 mostcitedP <- citations(bib, field = "article", sep = ";")
-cbind(mostcitedP$Cited[1:10])
+cbind(mostcitedP$Cited[1:10]) #first 10
 ```
 
 Ten most cited authors:
 
 ```{r  most cited authors, eval=TRUE}
 mostcitedA <- citations(bib, field = "author", sep = ";")
-cbind(mostcitedA$Cited[1:10])
+cbind(mostcitedA$Cited[1:10]) #first 10
 ```
 
 
@@ -280,8 +285,9 @@ The function *localCitations* generates the frequency table of the **locally** m
 Ten most frequent local cited authors and papers:
 
 ```{r  most cited local authors, eval=TRUE}
-mostcitedLA <- localCitations(bib, results, sep = ";")
-mostcitedLA[1:10]
+mostcitedLA <- localCitations(bib, sep = ";")
+mostcitedLA$Authors[1:10,]
+mostcitedLA$Papers[1:10,]
 ```
 
 
@@ -398,7 +404,7 @@ Is the map different?
 
 ****  
 
-### TASK 15   
+### TASK 16   
 **Note**: you may want to skip this step on a big data set or a slow computer.       
 **Historical Direct Citation Network** - represents a chronological network map of most relevant direct citations in a bibliographic collection, i.e who is citing whom and in what order.
 *histNetwork* function calculates a chronological direct citation network matrix which then is plotted using *histPlot*:
@@ -406,13 +412,13 @@ Is the map different?
 ```{r  histNetwork, eval=TRUE, message=FALSE}
 #options(width = 130)
 histResults <- histNetwork(bib, min.citations = 10, sep = ";")
-net = histPlot(histResults, labelsize = 2, arrowsize = 0.5)
+net = histPlot(histResults, labelsize = 2)
 ```
 
 Only articles with minimum of 10 citations are included in teh above analysis, if you change this number to a higher value, the analyses will be quicker and the plot less dense.    
 
 
-**MORE TO DO**
+**MORE TO DO**    
 You can use different types of network plots - just tweak "type" parameter in the *networkPlot* function (check the vignette for the available options). Type indicates the network map layout: circle, kamada-kawai, mds, etc.     
 
 You can use non-R tools to visualise bibliographic networks, e.g. VOSviewer software by Nees Jan van Eck and Ludo Waltman (http://www.vosviewer.com). When in R function you usetype=“vosviewer”, the function will export the network a standard "pajek" network file (named “vosnetwork.net”), which can be used in other network-plotting software, including VOSviewer.   
@@ -465,6 +471,6 @@ pdf(file="Figure_historical_network.pdf", width=8, height=8, pointsize=10)
 par(mfrow=c(1,1), mar=c(0,0,0,0))
 M <- metaTagExtraction(bib, Field = "CR_AU", sep = ";")
 histResults <- histNetwork(M, n=143, sep = ";") # "n" (number of most cited references to select) picked manually, larger numbers give error
-histPlot(histResults, size=TRUE, arrowsize = 0.2) 
+histPlot(histResults, size=TRUE) 
 dev.off()
 ```

@@ -18,11 +18,11 @@ library(bibliometrix)
 Please make sure you got the latest RStudio and latest R version installed.   
 
 **Lesson objectives:**   
- * learn to perform a search in academic literature database   
- * download search results and import them into R    
- * summarise bibliometric data   
- * make a few types of simple bibliometric networks   
- * plot bibliometric networks    
+ * Learn to perform a search in academic literature database   
+ * Download search results and import them into R    
+ * Summarise bibliometric data   
+ * Make a few types of simple bibliometric networks   
+ * Plot bibliometric networks    
  
 **Lesson outline:**   
  * About this lesson   
@@ -37,7 +37,7 @@ Please make sure you got the latest RStudio and latest R version installed.
 ## About this lesson   
 
 This lesson is prepared for these who are already familiar with R coding language, R markdown and RStudio.
-By the end of this tutorial you should be able to create a simple html document containing  markdown-formatted text, images and R code, all in R Studio.
+By the end of this tutorial you should be able to create a simple html document containing  markdown-formatted text, images and R code, all in RStudio.   
 
 
 ****
@@ -57,21 +57,23 @@ You can read more on this Wiki page: https://en.wikipedia.org/wiki/Terminal_inve
 
 We hope the topic is quite appealing and quiet easy to understand.There are several published reviews on terminal investment hypothesis and we can expect many publications related to this topic, as well as many researchers working on it. Is this so?  
 
-Thus, we will try to run bibliometric analyses on the relevant sample of literature. Note that some R packages (and many other online/software tools) are available (and more are being developed) that can perform some of the tasks which we will practice during this exercise, and often much more. For your own project you may want to try to use some of them, but there is no single "perfect" tool that fits all possible analyses and that is easy and usable for all disciplines and types of research questions. Note that the main purpose of this exercise is to familiarize you with the basic principles/issues of bibliometric analyses. You can always learn more in your own time if you are interested.       
+Today, we will try to run bibliometric analyses on the relevant sample of literature. Note that ther are a few available  R packages (and many other online/software tools, and new are being developed) that can perform some of the tasks which we will practice during this exercise, and often they can do much more. For your own project you may want to try to use some other tools, but there is no single "perfect" tool that fits all possible analyses and that is easy and usable for all disciplines and types of research questions. Also note that the main purpose of this exercise is to familiarize you with the basic principles/issues of bibliometric analyses. You can always learn more in your own time if you are interested.       
 
 
 ****
 
 *The search*
 
-First, we need to find a representative sample of academic publications on our topic of choice. For this, we will use cross-disciplianary database of academic literature, Scopus. This database has the largest coverage of the published literature and should give us the most complete picture.   
-Note that we have free access to this database on campus, but you will not be able to access it from outside the campus unless (you use UNSW or other university proxy servers). An alternative database, commonly used for broad academic literature searches and analyses, is Web of Science: https://www.webofknowledge.com/.   
+First, we need to find a representative sample of academic publications on our topic of choice. For this, we will use cross-disciplianary database of academic literature, Scopus. This database has the largest coverage of the published literature and should give us the most complete picture. An alternative database, commonly used for broad academic literature searches and analyses, is Web of Science: https://www.webofknowledge.com/ (WoS; it has slightly different way of formatting serach strings).   
+
+You should have free access to Scopus and Wos database on campus, but you may not be able to access it from outside the campus unless you use UNSW VPN or other university proxy servers (try loging in via the Library). Free-access broad-coverage databases include BASe (Bielfield Academic Search Engine, https://www.base-search.net/)  and Lens (lens.org). Google Scholar is not good, mainly because it is hard to export bibliometric records from the results list.    
 
 
 ****   
 
 ### TASK 1    
-Go to Scopus search page: https://www.scopus.com/search/form.uri?display=basic  and enter "terminal investment" (with the quotes) in the basic search window, as follows:  
+Go to Scopus search page: https://www.scopus.com/search/form.uri?display=basic and enter terminal investment in the basic search window, as follows:   
+
 ```{r Scopus_TI_res_simple_search, echo=FALSE, fig.cap=" ", out.width='80%'}
 knitr::include_graphics("images/Scopus_TI_res_simple_search.png")
 ```
@@ -79,7 +81,8 @@ knitr::include_graphics("images/Scopus_TI_res_simple_search.png")
 
 ****   
 
-Press "Search"" button. You shoud see something like this:   
+Press "Search"" button.    
+You shoud see results like this:   
 
 
 ****   
@@ -91,16 +94,16 @@ knitr::include_graphics("images/Scopus_TI_res_simple_search_res.png")
 
 ****   
 
-Hey, this does not look good... - very few documents were found and some of them are completely unrelated (building shipping terminals).   
+Hey, this does not look good... - many documents were found, and mostof them are completely unrelated (e.g. on building shipping terminals).   
 Why is that?    
 
 
 ****   
 
-This is because our search is too simple. It allows us only to find the papers that explicitly mention "terminal investment" phrase in their title, abstract or keywords. To find a better set of papers for the analyses, we need a more sophisticated search string. Additionally, we will focus our topic a little bit more and aim to find papers that use immune challenge approach in wild or semi-wild animal species (so, we try to exclude established lab model species such as mice and rats, domesticated animals such as dogs and pigs, and humans). Finding the best search string is a bit of an art, so we just provide you with this one to save time:   
+This is because our search is too simple. It allows us only to find the papers that explicitly mention terminal AND investment words in their title, abstract or keywords. To find a more relevant set of bibliometric records for our analyses, we need a more sophisticated search string. Additionally, we will narrow down our topic a little bit more and aim to find papers that use immune challenge approach in wild or semi-wild animal species (so, we try to exclude established lab model species such as mice and rats, domesticated animals such as dogs and pigs, and humans). Finding the best search string is a bit of an art, so we just provide you with this one to save time:   
 
 ```
-(TITLE-ABS-KEY ( ( "terminal investment"  OR  "reproductive effort"  OR  "fecundity compensation"  OR  "reproductive compensation"  OR  "reproductive fitness"  OR  "reproductive investment"  OR  "reproductive success"  OR  "Life History Trade-Off*"  OR  "Phenotypic Plasticity" )  AND  ( "immune challeng*"  OR  "immunochalleng*"  OR  "infect*"  OR  lipopolysaccharide  OR  lps  OR  phytohemagglutinin  OR  pha  OR  "sheep red blood cells"  OR  srbc  OR  implant  OR  vaccin* ) )  AND NOT  TITLE-ABS-KEY ( load  OR  human  OR  people  OR  men  OR  women  OR  infant*  OR  rat  OR  rats  OR  mouse  OR  mice  OR  pig*  OR  pork  OR  beef  OR  cattle  OR  sheep  OR  lamb*  OR  chicken*  OR  calf*  OR  *horse* ))  
+TITLE-ABS-KEY ( ( "terminal investment"  OR  "reproductive effort"  OR  "fecundity compensation"  OR  "reproductive compensation"  OR  "reproductive fitness"  OR  "reproductive investment"  OR  "reproductive success"  OR  "Life History Trade-Off*"  OR  "Phenotypic Plasticity" )  AND  ( "immune challeng*"  OR  "immunochalleng*"  OR  "infect*"  OR  lipopolysaccharide  OR  lps  OR  phytohemagglutinin  OR  pha  OR  "sheep red blood cells"  OR  srbc  OR  implant  OR  vaccin* ) )  AND NOT  TITLE-ABS-KEY ( load  OR  human  OR  people  OR  men  OR  women  OR  infant*  OR  rat  OR  rats  OR  mouse  OR  mice  OR  pig*  OR  pork  OR  beef  OR  cattle  OR  sheep  OR  lamb*  OR  chicken*  OR  calf*  OR  *horse* )  
 ```
 
 
@@ -115,7 +118,7 @@ knitr::include_graphics("images/Scopus_TI_res_all_adv_search.png")
 
 ****   
 
-Press "Search"" button. You shoud see somethink like this:   
+Press "Search"" button. You shoud see results like this:   
 
 
 ****   
@@ -127,18 +130,22 @@ knitr::include_graphics("images/Scopus_TI_res_all.png")
 
 ****   
 
-There are over 1,000 records retrieved from the Scopus database (some look relevant and many are not, but that is always the case). On the left of the results window you can see simple filters: year, most common author names, subject areas, etc. You can explore the whole set roughly by using "Analyze search results" link above the table of the hits:   
+There are still over 1,300 records retrieved from the Scopus database. Ssome look relevant and many are not, but that is always the case, for a systematic review or a meta-analysis we would manually screen all an exclude all irrelevant papers).    
+
+On the left side of the results window you can see simple filters: year, most common author names, subject areas, etc. You can explore the whole set roughly by using "Analyze search results" link above the table of the hits:   
 
 ```{r New_R_markdown_popup, echo=FALSE, fig.cap=" ", out.width='80%'}
 knitr::include_graphics("images/Scopus_TI_res_analaysis.png")
 ```
+
+There are more graphs below, and you can expand and customise them a bit too - have a look!   
 
 
 ****   
 
 ### TASK 3    
 
-Next, we will export the bibliometric records for more detailed bibliometric analyses in R. To do so, close the Scopus analyses window to go back to the list of records found. First, select all records by clicking box "All" in the left top of the list of references. Then click the "Export" link to the right.    
+Next, we can export the bibliometric records for more detailed bibliometric analyses in R. To do so, close the Scopus analyses window and go back to the list of records found. First, select all records by clicking box "All" in the left top of the list of references. Then click the "Export" link to the right.    
 
 A pop-up window with the export options will appear.   
 First, select the format of the export: we will uses .bib file (BibTex format of references, one of the standard ones).   
@@ -174,7 +181,7 @@ library(bibliometrix)	#uploads the package
 # Note: output not displayed for this chunk
 ```
 
-Upload the file exported from Scopus (you can use one provided) into RStudio (note that the file path you may need to use on your computer may be different, e.g., "H:/Users/z1234567/Downloads/scopus.bib").    
+Upload the file exported from Scopus (you can use the one provided) into RStudio (note that the file path you may need to use on your computer may be different, e.g., "H:/Users/z1234567/Downloads/scopus.bib").    
 Then, convert the data from that file into internal *bibliometrix* format.  
 
 ```{r upload data, eval=TRUE}
@@ -183,7 +190,7 @@ names(bib)
 #write.csv(bib, "data/bib_as_df.csv", row.names = FALSE) #if you want to save this data frame as a csv file
 ```
 
-After some processing, an object called "bib" is created. It contains a data frame with each row corresponsing to one exported publication from Scopus and with each column corresponsing to a field exported from Scopus online database. (Note, if you tried to achieve this by exporting a csv file directly from Scopus, you would likely get a meessy data frame, due to missing field values shifting the cells between columns). 
+After some processing, an object called "bib" is created. It contains a data frame with each row corresponsing to one exported publication from Scopus and with each column corresponding to a field exported from Scopus online database. If you tried to achieve this by exporting a csv file directly from Scopus, you would sonetimes get a meessy data frame, due to missing field values shifting the cells between columns. 
 
 
 ****   
@@ -193,7 +200,7 @@ What are the contents of the columns of our "bib" data frame?  Columns are label
 For a complete list and descriptions of field tags used in *bibliometrix* you can have a look at this file:   http://www.bibliometrix.org/documents/Field_Tags_bibliometrix.pdf   
 Our data frame contains just a subset of these codes. Which ones?   
  
-Note that column **bib$AU** contains authors of each paper (as surenames and initials) separated by semicolon (;). We can easily split these strings and can extract a list of all author names to a vector:    
+Note that column **bib$AU** contains authors of each paper (as surenames and initials) separated by semicolon (;). We can easily split these strings and extract a list of all author names to a vector:    
 
 ```{r get author names, eval=TRUE}
 # head(bib$AU) #have a look at the few few records on your sceen
@@ -209,7 +216,7 @@ head(authors) #have a look again
 ****   
 
 ### TASK 6    
-Cited references for each inculded paper are in the CR column of the "bib" data frame. They are in a single string, also seperated by semicolon (;). We can have a look at them and check whether familiar names were cited, e.g.:   
+Cited references for each included paper are in the CR column of the "bib" data frame. They are in a single string, also seperated by semicolon (;). We can have a look at them and check whether familiar names were cited, e.g.:   
 
 ```{r  citations, eval=TRUE}
 dim(bib) #dimensions of the data frame
@@ -231,7 +238,7 @@ bib[grep("CORNWELL, W.", bib$CR), c(1:3)] #who is citing?
 
 Luckily, *bibliometrix* package  has a handy function that summarises the information contained in the "bib" data frame, so we can get some quick facts about our set of papers.   
 
-**Note:** this and the following tasks require quite a bit of computational power, thay may be slow or even halt on your computer.    
+**Note:** this and the following tasks require quite a bit of computational power, they may be slow or even halt on your computer.    
 In such case, for this exercise, make your data frame smaller by subsetting it, e.g.:   
 "bib <- bib[1:500, ] #taking first 500 records". However, the results and plots you will produce with a subsetted data frame will differ from the ones presented in this document.     
 
@@ -245,9 +252,9 @@ bib <- bib[1:500, ] #taking first 500 records
 #summary(object = results, k = 10, pause = TRUE) #display a series of summary tables
 ```
 
-Using summary function on *bibliometrix* results, we can get several screens with various tables summarising bibliometric data from our data frame - how many documents, journals, keywords, authors, publicatons timespan, collaboration index, annual publication growth rate, most prolific authors, publications per country, per journal, per keywords, etc.    
+Using *summary* function on *bibliometrix* results, you  get several screens with various tables summarising bibliometric data from our data frame - how many documents, journals, keywords, authors, publicatons timespan, collaboration index, annual publication growth rate, most prolific authors, publications per country, per journal, per keywords, etc.    
 
-You can automatically plot some of these tables (hit "return"" to displey next graph, and later you can use arrows in the top left of the plots pane to move back and forth between consecutive graphs saved in the RStudio memory):  
+You can automatically plot some of these tables (hit "return"" to display next graph, and later you can use arrows in the top left of the plots pane to move back and forth between consecutive plots saved in the RStudio memory):  
 
 ```{r  descriptive plots, eval=TRUE, message=FALSE}
 plot(results, k = 10, pause=TRUE) #this takes top 10 values from each plottable table
@@ -263,7 +270,7 @@ plot(results, k = 10, pause=TRUE) #this takes top 10 values from each plottable 
 
 ### TASK 8    
 The cited papers from the CR field of the data frame can be analysed using function *citations*.   
-Function *citations* makes it easy to generate the frequency tables of the most cited papers or the most cited first authors from the reference lists of our papers downloaded from Scopus.    
+Function *citations* makes it easy to generate the frequency tables of the most cited papers or the most cited first authors.    
 
 Ten most cited papers:   
 
@@ -280,7 +287,7 @@ cbind(mostcitedA$Cited[1:10]) #first 10
 ```
 
 
-The function *localCitations* generates the frequency table of the **locally** most cited authors. Locally, means that only citations are counted only within the given data set - i.e.  how many times an author/paper that is in this data set has been cited by other authors/papers also in the data set.
+Function *localCitations* generates the frequency table of the **locally** most cited authors. Locally means that  citations are counted only within the given data set - i.e.  how many times an author/paper that is in this data set has been cited by other authors/papers also in the data set.
 
 Ten most frequent local cited authors and papers:
 
@@ -297,65 +304,66 @@ mostcitedLA$Papers[1:10,]
 
 So far, we looked only at the numbers - who or what gets cited most, either from the main papers list or from the lists of the references within these papers. Now it is time to look at the actual networks of citations and also other types of networks that can be created using our data set.   
 
-To do so we will be creating various rectangular matrices which reflect connections of different attributes of Papers/Authors. These matrices than can be plotted as bipartite networks and analysesd.  
+To do so, we will be creating various rectangular matrices which reflect connections of different attributes of Papers/Authors. These matrices than can be plotted as bipartite networks and analysed.  
 
-Co-citation or coupling networks are a special type of newtorks resulting from scientific papers containing references to other scientific papers.   
+Co-citation or coupling networks are a special type of networks build from the information on scientific papers containing references to other scientific papers.   
 
-Package *bibliometrix* contains function *biblioNetwork* which makes creating bibliomgraphic networks easy.  This function can create the most frequently used coupling networks: Authors, Sources, and Countries.   
+Package *bibliometrix* contains function *biblioNetwork* which makes creating bibliographic networks easy.  This function can create the most frequently used coupling networks: Authors, Sources, and Countries.   
 
 
 ****  
 
 ### TASK 9    
-**Bibliographic coupling** - two articles are bibliographically coupled if they share at leas one reference from their reference lists (i.e. at least one cited source appears in the reference lists/bibliographies of both papers (Kessler, 1963).    
+**Bibliographic coupling** - two articles are bibliographically coupled if they share at least one reference from their reference lists, i.e. at least one cited source appears in the reference lists/bibliographies of both papers (Kessler, 1963).    
 
 ```{r  paper coupling network, eval=TRUE}
 NetMatrix <- biblioNetwork(bib, analysis = "coupling", network = "references", sep = ";")
 net = networkPlot(NetMatrix, weighted = NULL, n = 10, Title = "Papers' bibliographic coupling", type = "fruchterman", size = 5, remove.multiple = TRUE, labelsize = 0.5)
 ```
 
-Above, we plotted only the top 10 most coupled papers (n=10), try increasing this number to 100 (would not recommend further increasing the number of displayed nodes - it gets slow and messy).   
+Above, we plotted only the top 10 most coupled papers (n=10). Try increasing this number to 100 (would not recommend further increasing the number of displayed nodes - it gets slow and messy).   
 What happens and why?    
 
   
 ****  
 
 ### TASK 10    
-**Author's bibliographic coupling** - two authors are bibliographically coupled if they share at leas one reference form their reference lists.    
+**Author's bibliographic coupling** - two authors are bibliographically coupled if they share at least one reference form their reference lists.    
 
 ```{r  author coupling network, eval=TRUE}
 NetMatrix <- biblioNetwork(bib, analysis = "coupling", network = "authors", sep = ";")
 net = networkPlot(NetMatrix, weighted = NULL, n = 10, Title = "Authors' bibliographic coupling", type = "fruchterman", size = 5, remove.multiple = TRUE, labelsize = 0.8)
 ```
 
-Above, we plotted only the top 10 most coupled authors (n=10), try increasing this number to 100 (would not recommend further increasing the number of displayed nodes to >50 - it gets slow and messy).   
+Above, we plotted only the top 10 most coupled authors (n=10). Try increasing this number to 100 (would not recommend further increasing the number of displayed nodes to >50 - it gets slow and messy).   
 What happens and why?    
 
   
 ****  
 
 ### TASK 11     
-**Bibliographic co-citation** is kind of opposite to bibliographic coupling, in so that two papers are linked by co-citatio when both are cited in a third papers.    
+**Bibliographic co-citation** is kind of opposite to bibliographic coupling, in so that two papers are linked by co-citation when both are cited in a third paper.    
 
 ```{r  paper co-citation network, eval=TRUE}
 NetMatrix <- biblioNetwork(bib[1:50,], analysis = "co-citation", network = "references", sep = ";")
 net = networkPlot(NetMatrix, weighted=NULL, n = 10, Title = "Papers' co-citations", type = "fruchterman", size = 5, remove.multiple = TRUE, labelsize = 0.5)
 ```
 
-Note that for creating this matrix we only used first 50 papers from our data set - this is because the resulting matrix is a matrix of ALL cited papers and it gets HUGE). Also, we plotted only the top 10 most coupled papers (n=10), try increasing this number to 20 (would not recommend further increasing the number of displayed nodes to >50 - it gets slow and messy).   
+Note that for creating this matrix we only used first 50 papers from our data set - this is because the resulting matrix is a matrix of ALL cited papers and it gets HUGE). Also, we plotted only the top 10 most coupled papers (n=10). Try increasing this number to 20 (would not recommend further increasing the number of displayed nodes to >50 - it gets slow and messy).   
 What happens and why?    
 
 
 ****  
 
 ### TASK 12     
-**Bibliographic collaboration** is a network where nodes are authors and links are co-authorships on the papers.     
+**Bibliographic collaboration** is a network where nodes are authors and links are co-authorships of the papers.     
 
 ```{r  author collaboration network, eval=TRUE}
 NetMatrix <- biblioNetwork(bib, analysis = "collaboration", network = "authors", sep = ";")
 net = networkPlot(NetMatrix, weighted = NULL, n = 10, Title = "Authors' collaborations", type = "fruchterman", size = 5, remove.multiple = TRUE, labelsize = 0.5)
 ```
-Above, we plotted only the top 10 most collaborating authors (n=10), try increasing this number to 100 (would not recommend further increasing the number of displayed nodes - it gets slow and messy).   
+
+Above, we plotted only the top 10 most collaborating authors (n=10). Try increasing this number to 100 (would not recommend further increasing the number of displayed nodes - it gets slow and messy).   
 What happens and why?    
 
 
@@ -370,7 +378,7 @@ NetMatrix <- biblioNetwork(bib, analysis = "collaboration", network = "countries
 net = networkPlot(NetMatrix, n = 10, Title = "Country Collaboration", type = "auto", size = TRUE, remove.multiple = FALSE, labelsize = 0.5)
 ```
 
-Above, we plotted only the top 10 most collaborating countrie (n=10), try increasing this number to 50 (would not recommend further increasing the number of displayed nodes to >100 - it gets slow and messy).   
+Above, we plotted only the top 10 most collaborating countrie (n=10). Try increasing this number to 50 (would not recommend further increasing the number of displayed nodes to >100 - it gets slow and messy).   
 What happens and why? 
 
 
@@ -392,14 +400,14 @@ Try replacing network = "keywords" with network = "author_keywords" and see what
 ### TASK 15  
 **Note**: you may want to skip this step on a big data set or a slow computer.     
 
-**Co-Word Analysis** - uses the word co-occurrences in a bibliographic collection to map the conceptual structure of research. It works via a separate function *conceptualStructure* that creates a conceptual structure map of a scientific field performing Correspondence Analysis (CA), Multiple Correspondence Analysis (MCA) or Metric Multidimensional Scaling (MDS) and Clustering of a bipartite network of terms extracted from keyword, title or abstract fields of the data frame.   
+**Co-Word Analysis** - uses the word co-occurrences in a bibliographic collection to map the conceptual structure of research. It works via a separate function *conceptualStructure* that creates a conceptual structure map of a scientific field performing Correspondence Analysis (CA), Multiple Correspondence Analysis (MCA) or Metric Multidimensional Scaling (MDS) and Clustering of a bipartite network of terms extracted from keyword, title or abstract fields of the data frame. Note that three different graphs are created as an output.   
 
 ```{r  conceptualStructure map, eval=TRUE}
 CS <- conceptualStructure(bib, field = "ID", minDegree = 20, k.max = 5, stemming = FALSE, labelsize = 10)
 ```
 
-The code above uses field ID, which stands for "conceptualStructure". You coul try using authors keywords, "DE" field, instead.   
-Is the map different?    
+The code above uses field = "ID". ID stands for "Keywords Plus associated by ISI or SCOPUS database", to analyse the "conceptualStructure". You could try using authors keywords, "DE" field, instead of "ID".   
+Is the new map different?    
 
 
 ****  
@@ -415,13 +423,13 @@ histResults <- histNetwork(bib, min.citations = 10, sep = ";")
 net = histPlot(histResults, labelsize = 2)
 ```
 
-Only articles with minimum of 10 citations are included in teh above analysis, if you change this number to a higher value, the analyses will be quicker and the plot less dense.    
+Only articles with minimum of 10 citations are included in the above analysis, if you change this number to a higher value, the analyses will be quicker and the plot less dense. Have a try!      
 
 
 **MORE TO DO**    
-You can use different types of network plots - just tweak "type" parameter in the *networkPlot* function (check the vignette for the available options). Type indicates the network map layout: circle, kamada-kawai, mds, etc.     
+You can use different types of network plots - just tweak "type" parameter in the *networkPlot* function (check the vignette for the available options). "Type" parameter indicates the network map plotting layout: circle, kamada-kawai, mds, etc.     
 
-You can use non-R tools to visualise bibliographic networks, e.g. VOSviewer software by Nees Jan van Eck and Ludo Waltman (http://www.vosviewer.com). When in R function you usetype=“vosviewer”, the function will export the network a standard "pajek" network file (named “vosnetwork.net”), which can be used in other network-plotting software, including VOSviewer.   
+You can use non-R tools to visualise bibliographic networks, e.g. VOSviewer software by Nees Jan van Eck and Ludo Waltman (http://www.vosviewer.com). When in R function you use type=“vosviewer”, the function will export the network as a standard "pajek" network file (named “vosnetwork.net”), which can then be used in other network-plotting software, including VOSviewer.   
 
 
 ****   

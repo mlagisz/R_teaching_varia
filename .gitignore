@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+/feedback/
+.DS_Store
+.Rproj

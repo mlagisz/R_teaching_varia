@@ -17,7 +17,7 @@ Please make sure you got the latest RStudio and latest R version installed.
 
 **Lesson objectives:**   
  * learn and practice basic markdown notations   
- * making simple R markdown documents in RStudio   
+ * making simple R markdown (Rmarkdown) documents in RStudio   
 
 **Lesson outline:**   
  * About this lesson   
@@ -33,18 +33,18 @@ Please make sure you got the latest RStudio and latest R version installed.
  * Changing code chunks   
  * In-line R code   
  * Displaying graphics   
- * More resouces    
+ * More resources    
 
 # About this lesson
 
-This lesson is prepared for these who are already familiar with R coding language, but have not used R markdown or RStudio. Thus, we assume basic knowledge of R programming language and we aim to teach the only the basics of Rmarkdown and RStudio. By the end of this tutorial you should be able to create a simple html document containing  markdown-formatted text, images and R code, all in RStudio.
+This lesson is prepared for these who are already familiar with R coding language, but have not used R markdown (Rmarkdown) or RStudio. Thus, we assume basic knowledge of R programming language and we aim to teach the only the basics of Rmarkdown and RStudio. By the end of this tutorial you should be able to create a simple html document containing  markdown-formatted text, images and R code, all in RStudio.
 
-By the way, this document was created using R Markdown in RStudio!
+By the way, this document was created using Rmarkdown in RStudio!
 
 ****
 
 # Markdown
-Markdown is a simple text formatting syntax for crating HTML documents (at least originally). It works by introducing special sets of formattig characters directly into the texts, which are understood by the text viewers and rendered as formatted text.   
+Markdown is a simple text formatting syntax for crating HTML documents (at least originally). It works by introducing special sets of formatting characters directly into the texts, which are understood by the text viewers and rendered as formatted text.   
 
 ### TASK 1    
 Take a short online tutorial to learn the basics of the standard markdown (15-30min):
@@ -57,11 +57,11 @@ https://commonmark.org/help/
 
 ****
 # R Markdown 
-R Markdown is a version of Pandoc’s markdown formatting, which is in turn based on the standard Markdown you just learned above. There are small differences between different versions of Markdown (just like English!), but the basic formatting conventions should work for most of the markdown styles. Pandoc's markdown (and R Markdown)  has additional syntax available for formatting tables, footnotes, maths and other non-basic text features that are useful when preparing documents in R. The complete list of Markdown formatting futures available via Pandoc, please visit the official documentation <https://pandoc.org/MANUAL.html#pandocs-markdown> (actually, Pandoc is a universal converter for many markup formats, but we are not going to cover it here).    
+R Markdown (Rmarkdown) is a version of Pandoc’s markdown formatting, which is in turn based on the standard Markdown you just learned above. There are small differences between different versions of Markdown (just like English!), but the basic formatting conventions should work for most of the markdown styles. Pandoc's markdown (and Rmarkdown)  has additional syntax available for formatting tables, footnotes, maths and other non-basic text features that are useful when preparing documents in R. The complete list of Markdown formatting futures available via Pandoc, please visit the official documentation <https://pandoc.org/MANUAL.html#pandocs-markdown> (actually, Pandoc is a universal converter for many markup formats, but we are not going to cover it here).    
 
 
 ### TASK 3    
-Have a look at the Rmarkdown cheatsheet (save the pdf for future reference!):    
+Have a look at the Rmarkdown cheat sheet (save the pdf for future reference!):    
 <https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf>    
 
 
@@ -69,7 +69,7 @@ Have a look at the Rmarkdown cheatsheet (save the pdf for future reference!):
 # Why Rmarkdown?    
 
 ### TASK 4    
-Using information from the cheatsheet, try to find at least 3 reasons for using Rmarkdown cheatsheet.    
+Using information from the cheat sheet, try to find at least 3 reasons for using Rmarkdown cheat sheet.    
 
 ****
 In brief, rather than having your R code in one document and the text describing it in another, Rmarkdown documents allow combining these two (and other outputs, like tables and plots) in a single file.    
@@ -83,7 +83,7 @@ Apart of this, there are several main advantages of working with Rmarkdown docum
  - finally, you can generate high quality and reproducible reports in various formats    
 
 ### TASK 5    
-Have a look at this 1-minute video about what’s possible with R Markdown:    
+Have a look at this 1-minute video about what’s possible with Rmarkdown:    
 <https://rmarkdown.rstudio.com/lesson-1.html>   
 Note: this webpage contains more detailed and extensive lessons on using Rmarkdown in RStudio - you should have a look at these later on.   
 
@@ -93,7 +93,7 @@ Note: this webpage contains more detailed and extensive lessons on using Rmarkdo
 # Why RStudio?    
 
 RStudio is a well-established and well-supported GUI (Graphical User Interface) that makes working with R code and Rmarkdown easier (and it is free and Open-Source as well). It does not take away the fun of typing and editing code in an "code editor" window and/or an R console!
-But, it also has menus and additional windows that display useful things, such as help info, your plots, lists of files, packages and objects stored in your computing enviornment, simplified Git interface, etc. These extras make coding and creating documents in RStudio much easier to learn and often more efficent. Wspecially, RStudio makes creating Rmarkdown documents easy. Let's have a go at it.   
+But, it also has menus and additional windows that display useful things, such as help info, your plots, lists of files, packages and objects stored in your computing environment, simplified Git interface, etc. These extras make coding and creating documents in RStudio much easier to learn and often more efficient. Especially, RStudio makes creating Rmarkdown documents easy. Let's have a go at it.   
 
 ### TASK 6      
 Have a quick look at the range of outputs that can be created using Rmarkdown:   
@@ -112,7 +112,7 @@ You should have RStudio installed by now. Open it on your computer. You will see
 # Creating new Rmarkdown (Rmd) document   
 
 ### TASK 7      
-From the top manu go to "File" -> "New File" -> from drop-down list select "R markdown..."     
+From the top menu go to "File" -> "New File" -> from drop-down list select "R markdown..."     
 A new window will pop up asking you for a Title and an Author (enter something suitable):   
 
 ```{r New_R_markdown_popup, echo=FALSE, fig.cap=" ", out.width='50%'}
@@ -126,7 +126,7 @@ A new document (file) tab will open in the main "Editor" window:
 knitr::include_graphics("images/New_R_markdown_file.png")
 ```
 
-Note that the file is pre-filled with some example content and basic inctructions on using Rmarkdown in RStudio.    
+Note that the file is pre-filled with some example content and basic instructions on using Rmarkdown in RStudio.    
 
 ****
 
@@ -138,18 +138,18 @@ A new pop-up will open asking you to save the file first, so enter suitable name
 
 The bottom window will switch from the "Console"" tab to the "R markdown" tab, and some processing code will appear there (useful when knitting does not work - check error messages in this window). A "knitted" html document should appear in a new pop up window (this file can be also seen in the internet browser - use a button on the top of the window).    
 
-This knitted example html document has the text that is formatted, some R code, some R code output and an embeded plot. The name of the file is the same as the markdown document you ust saved and named, but has **.html** as its file name extension (Rmarkdown documents have file extension - **.Rmd**). The file be default gets saved in the same folder as your source (Rmarkdwon) file.    
+This knitted example html document has the text that is formatted, some R code, some R code output and an embedded plot. The name of the file is the same as the markdown document you just saved and named, but has **.html** as its file name extension (Rmarkdown documents have file extension - **.Rmd**). The file be default gets saved in the same folder as your source (Rmarkdown) file.    
 
 ****
 
-# Changing coode chunks   
+# Changing code chunks   
 
 Code chunks contain one or more lines of R code.    
-To didstinguish R code from the plain text. each chunk is surrounded with three ACCENT GRAVE (`) characters (three at the start and three at the end..
+To distinguish R code from the plain text. each chunk is surrounded with three ACCENT GRAVE (`) characters (three at the start and three at the end..
 Each chunk, after initial " ``` ", has a code chunk header surrounded with curly braces {}. The header starts with the symbol "r", followed by chunk name/label and (optional) chunk options, e.g. {r pressure, echo=FALSE}.   
 
 ### TASK 9     
-In RStudio code editor window, go to the code chunk named "cars" (that is the sacond code chunk in the example file).  
+In RStudio code editor window, go to the code chunk named "cars" (that is the second code chunk in the example file).  
 Add a following line at the end of the chunk:   
 
 ```{r, eval=FALSE}
@@ -165,7 +165,7 @@ The code should look like this:
 summary(cars)
 head(cars)
 ```
-An additional output (top few rows of the dataset) should appear after the new line of code (note that different shades of grey background are used - this is a standard way of indicating the code and output in knitted documents).    
+An additional output (top few rows of the data set) should appear after the new line of code (note that different shades of grey background are used - this is a standard way of indicating the code and output in knitted documents).    
 
 ### TASK 10     
 Back in RStudio code editor window, go to the "cars" code chunk and change the chunk header from {r cars} to {cars, echo=FALSE}.    
@@ -184,7 +184,7 @@ The R code of the first chunk should be visible again.
 Similarly to changing the visibility of the R code, you can turn on and off the output of the code (the stuff that is displayed in the R "console" window after each line of executed code) by using parameter "include" (TRUE or FALSE).    
 You can also set whether each individual chunk of code actually gets executed, by using parameter "eval" (TRUE or FALSE). This allows you to switch off the chunks that are not needed anymore for some reason.      
 
-These were the most commonly used parameters of individual chunks and we will practice using them in a few of the tasks below. However, you also need to know can also set these parameters globally - i.e. for the whole Rmarkdown document - by using a special "setup" code chunk at the start of the document, with a "opts_chunk" function. Have a look at the top of your RMarkdwon document - you should see this first chunk with the document settings:
+These were the most commonly used parameters of individual chunks and we will practice using them in a few of the tasks below. However, you also need to know can also set these parameters globally - i.e. for the whole Rmarkdown document - by using a special "setup" code chunk at the start of the document, with a "opts_chunk" function. Have a look at the top of your RMarkdown document - you should see this first chunk with the document settings:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -210,7 +210,7 @@ The mean car speed is `r mean(cars$speed)` mph.
 Save and knit the file.    
 What happened?    
 
-Now you shoud have a line of text with in-line value representing mean spead of the cars from the example "cars" dataset.   If the datafame changes in any way and you re-knit the document, this value will be updated automatically.    
+Now you should have a line of text with in-line value representing mean spread of the cars from the example "cars" data set.   If the data frame changes in any way and you re-knit the document, this value will be updated automatically.    
 
 ****
 ## Displaying graphics     
@@ -234,13 +234,13 @@ dev.off()
 Save and knit the file.    
 What happened?    
 
-The code returns a message (you can get rid of it by changing echo=FALSE to include=FALSE), but the plot does not appear in the .html document. It is becouse the plot gets saved as a new jpg file into your working directory. We will get it out of there in the next task!      
+The code returns a message (you can get rid of it by changing echo=FALSE to include=FALSE), but the plot does not appear in the .html document. It is because the plot gets saved as a new jpg file into your working directory. We will get it out of there in the next task!      
 
 ### TASK 16      
-Now we will use the saved picture from the previous task to practice embeding picture files saved on the computer into an Rmarkdown document. Add some text below the last code chunk, e.g.:    
+Now we will use the saved picture from the previous task to practice embedding picture files saved on the computer into an Rmarkdown document. Add some text below the last code chunk, e.g.:    
 "...and now let's add the figure from a saved file:"    
 
-Then, create a new code chunk (you can type all the chunk symbols manually, use Insert - R button at the top of the editor window, funtion from the main menu or command+alt+I shortcut). Remember to give it a header with a new (unique!) name, e.g.:   
+Then, create a new code chunk (you can type all the chunk symbols manually, use Insert - R button at the top of the editor window, function from the main menu or command+alt+I shortcut). Remember to give it a header with a new (unique!) name, e.g.:   
 
 {r pressure plot from a file}       
 
@@ -250,10 +250,10 @@ knitr::include_graphics("pressure.jpeg")
 ```
 
 This should work for a file saved in your current working directory. 
-For files located elsewhere you will need to use full or partial path to point the code to the location of the file (its good to have all inmages in a dedicated subdirectory of your working directory, named e.g. "images").   
+For files located elsewhere you will need to use full or partial path to point the code to the location of the file (its good to have all images in a dedicated sub-directory of your working directory, named e.g. "images").   
 
 Finally, you do not need to re-knit the whole document each time.
-You can run stil run individual (or groups of) lines of code by highlighting them and pressing ommant+enter as in a basic R editor. You can run individual chunks using several options (and keybord shortcust) listed under the Run button at the top-right of the code editor window (check it out now!). This gives you more flexibility and makes it faster to work with you R code. And that was one of the reasons for this tutorial.     
+You can run still run individual (or groups of) lines of code by highlighting them and pressing command+enter as in a basic R editor. You can run individual chunks using several options (and keyboard shortcuts) listed under the Run button at the top-right of the code editor window (check it out now!). This gives you more flexibility and makes it faster to work with you R code. And that was one of the reasons for this tutorial.     
 
 But that's not all, there are many more secrets to productive work with RStudio.   
 So, if you have some time, read about using projects in RStudio:   
@@ -264,7 +264,7 @@ and start using it!
 
 *****
 
-*We hope this lesson got you started on the path to butiful and reproducibe documents in Rmarkdown using RStudio...    *
+*We hope this lesson got you started on the path to beautiful and reproducible documents in Rmarkdown using RStudio...    *
 
 
 *****
